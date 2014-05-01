@@ -1,0 +1,19 @@
+<div  class="newFeedForm">
+    <ul>
+      <li style="position:relative;margin-top:10px; margin-bottom: 10px">
+          <input autofocus="true" class="query-input" placeholder="Search" fm-name="name"/>
+          <input type="submit" class="searchlist btn-sm btn" value="Search" fm-name="submit"/>
+      </li>
+    </ul>
+    <div style="margin-left:30px;" fm-name="info">Search Site, Topic...</div>
+    <div style="overflow-y:auto;" fm-name="listcontainer">
+      <div class="source-item-list" fm-repeat="item in results">
+        <div class="items no-text-wrap">
+          <a fm-click="save(item)">
+            <img style="max-width:30px; min-width:20px;" fm-src="http://www.google.com/s2/favicons?domain={{item.website}}"/>
+            <span fm-bind="item.title"></span>
+          </a>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+   <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" /> -->
+    <style type="text/css">
+      body, html {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        -ms-content-zooming: none;
+        -ms-touch-action:none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      a{
+        text-decoration: none;
+      }
+    </style> 
+    <link rel="icon" type="image/ico" href="/img/home.jpg" />
+    <link type="text/css" rel="stylesheet" href='/css/reader.css' />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery-swipe.js"></script>
+    <script type="text/javascript" src="/js/jsfm.js"></script>
+    <script>
+      $(document).on('click', 'a', function(){ 
+      if( this.getAttribute('href') && this.getAttribute('href').indexOf('http') != -1 ){
+      //window.open(this.getAttribute('href'), "_blank");
+      return false;
+      }
+      });
+
+    </script>
+    <style type="text/css">
+      .items{
+      padding: 5px 0 0 20px;
+      vertical-align: middle;
+      font-size:22px;
+      line-height:45px;
+      }
+      .ImageShow{
+      height: 100px;
+      float:right;
+      width: 100px;
+      margin: 10px;
+      }
+      .ImageShow img{
+      float: right;
+      }
+      
+      .imageView{
+      background: #ccc;
+      opacity: 1;
+      z-index: 99999;
+      position: fixed;
+      top:0;
+      left:0;
+      }
+      .imageView img{
+        max-width: 94%;
+        max-height: 94%;
+        margin: 3%;
+      }
+      .items a{
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      }
+      .right-panel .vertical-news-container{
+      cursor: pointer;
+      }
+      .setting{
+      margin:10px 0 0 20px;
+      }
+      #article-list{
+      overflow: hidden;
+      }
+      html{
+      overflow:hidden !important;
+      }
+      $(document).ready(function(){
+      $("html").scroll(function(){
+      return false;
+      });
+      });
+
+    </style>
+  </head>
+  <body>
+       <div id="view">
+      </div>
+     <script type="text/javascript">
+       fm.basedir = '/js/src';
+       function NOTIFY(a){
+		      window.external.notify(a);
+	     }
+       jQuery.support.cors = true;
+      // fm.isMinified=true;
+       fm.Include("com.reader.Reader");
+     </script>
+  </body>
+</html>

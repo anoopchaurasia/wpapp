@@ -1,0 +1,56 @@
+﻿<div id="article-list"
+     style="width: 100%;">
+    <div>
+        <div
+             style="padding:10px;font-size: 20px;">
+
+            <img style="margin:10px 0 0 10px;line-height:50px;" 
+                 fm-src="{{articles.thumbnail}}" />
+            <span 
+                style="font-weight:600;  padding: 10px;"
+                fm-bind="replaceSpace(articles.title)">
+            </span>
+            <div style="clear:both">
+            </div>
+        </div>
+        <div 
+             style="overflow:auto;top:20px" 
+             fm-name="articleMove">
+            
+            <div 
+                 class="newsSnippet" 
+                 fm-repeat="item in articles.items">
+
+                <div 
+                     style="font-size:1.2em; line-height:1.5em;" 
+                     fm-click="showArticle(item.id)">
+                    
+                    <div 
+                         fm-hide="!item.image" 
+                         style="width:100px; height:50px;overflow:hidden;"
+                         class="brief-image">
+                        
+                        <img 
+                             fm-src="{{item.image.url}}" />
+                    </div>
+                    <div class="brief-title">
+                        <h2 
+                            class="title" 
+                            fm-bind="item.title">
+                        </h2>
+                    </div>
+                    <div 
+                         fm-hide="verticleAlign" 
+                         class="brief-body">
+                         
+                        <p 
+                           fm-bind="item.contentSnippet">
+                        </p>
+                    </div>
+                </div>
+                <br class="clear:both" />
+            </div>
+            <br />
+        </div>
+    </div>
+</div>
