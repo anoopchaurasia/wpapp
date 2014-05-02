@@ -1,0 +1,62 @@
+<div id="settingPopup" class="setting-popup">
+  <div fm-click="close()" style="
+          padding: 10px;
+          margin-top:-10px;
+          margin-right:-10px;
+          shadow:0 0 10px #ccc;
+          box-shadow: 1px 1px 5px 1px #3C0D0D;
+          float:right;
+          text-shadow: 0px 1px #ccc;
+          color: white;
+          background: red;
+          height: 9px;
+          border-radius: 15px;
+          width: 9px;
+          font-size: 19px;
+          line-height: 5px;">x</div>
+  <div class="clearboth"></div>
+  <ul>
+    <li>
+      <div>FONT SIZE</div>
+      <div>
+        <div fm-click="applyFontSize(10)" class="font-size f_10">
+          Aa
+        </div>
+        <div fm-click="applyFontSize(15)" class="font-size f_15">
+          Aa
+        </div>
+        <div fm-click="applyFontSize(20)" class="font-size f_20">
+          Aa
+        </div>
+        <div fm-click="applyFontSize(25)" class="font-size f_25">
+          Aa
+        </div>
+        <div fm-click="applyFontSize(30)" class="font-size f_30">
+          Aa
+        </div>
+      </div>
+    </li>
+  </ul>
+  <br class='clearboth' />
+  <br class='clearboth' />
+  <ul>
+    <li>
+      <div>COLOR MODE</div>
+      <br class='clearboth' />
+      <div>
+        <div fm-click="applyColors({color:'black','background-color':'white'})" class="color_mode black_white">
+          White
+        </div>
+        <div fm-click="applyColors({color:'#5F4B32','background-color':'#FBF0D9'})" class="color_mode c5F4B32_bFBF0D9">
+          Sepia
+        </div>
+        <div fm-click="applyColors({color:'white','background-color':'black'})" class="color_mode white_black">
+          Black
+        </div>
+      </div>
+    </li>
+  </ul>
+  <br/>
+  <br/>
+  <br/>
+</div>

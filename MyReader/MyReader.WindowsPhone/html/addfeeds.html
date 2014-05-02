@@ -1,0 +1,39 @@
+<div>
+  <div class="header-class">
+    <h1 style="display:inline-block">Select from List</h1>
+    <a class="home-header" style="font-size:22px; float:right; margin-right:10px;" href="#/addfeedsource">
+              <span class="add-plus">+</span><span class="add-text">add</span></a>
+  </div>
+  <form>
+    <div style="overflow-y:auto;width:100%;overflow-x:hidden; position:relative;" fm-name="feedlistContainer">
+      <input placeholder="Filter " class="query-input"  fm-name="query" />
+      <input type="button" class="searchlist btn-sm btn" value="New" fm-click="addNew()"/>
+      <ul fm-hide="isEmpty(feeds)"  fm-repeat="feeds in FeedList" >
+        <li class="type-head">
+          <span  fm-bind="index"></span>
+       <!--   <div fm-click="remove(feeds, index)" style="
+          padding: 10px;
+          margin-right:10px;
+          shadow:0 0 10px #ccc;
+          box-shadow: 1px 1px 5px 1px #3C0D0D;
+          float:right;
+          text-shadow: 0px 1px #ccc;
+          color: white;
+          background: #ccc;
+          height: 9px;
+          border-radius: 15px;
+          width: 9px;
+          font-size: 19px;
+          line-height: 5px;">x</div>-->
+        </li>
+        <li class="feedlistitem source-item-list" fm-repeat="feed in feeds|filter:filter(feed)">
+          <label class="no-text-wrap full-width-height">
+            <input type="checkbox" fm-checked="isInList(feed)" fm-value="feed.inlist" />
+            <img width="20" fm-src='{{feed.thumbnail}}' />
+            <span fm-bind="feed.name"></span>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </form>
+</div>
