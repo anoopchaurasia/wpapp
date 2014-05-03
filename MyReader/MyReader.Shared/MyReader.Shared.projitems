@@ -15,6 +15,8 @@
     <Content Include="$(MSBuildThisFileDirectory)html\editfeed.view.html" />
     <Content Include="$(MSBuildThisFileDirectory)html\home.view.html" />
     <Content Include="$(MSBuildThisFileDirectory)html\index.html" />
+    <Content Include="$(MSBuildThisFileDirectory)html\login.html" />
+    <Content Include="$(MSBuildThisFileDirectory)html\login.view.html" />
     <Content Include="$(MSBuildThisFileDirectory)html\newslist.view.html" />
     <Content Include="$(MSBuildThisFileDirectory)html\settings.html" />
     <Content Include="$(MSBuildThisFileDirectory)html\sources.html" />
@@ -176,6 +178,7 @@
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\controller\AddFeedSourceController.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\controller\EditNewsFeed.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\hash\RegisterHash.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\login\LoginController.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\Reader.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\setting\Settings.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\setting\SettingsController.js" />
@@ -189,6 +192,7 @@
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\view\Article.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\view\EditFeed.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\view\Home.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\view\Login.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\view\NewsList.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\jfm\dom\ChangeListener.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\jfm\dom\Controller.js" />

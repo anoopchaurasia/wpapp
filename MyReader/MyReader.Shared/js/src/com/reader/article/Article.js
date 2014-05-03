@@ -12,6 +12,6 @@ com.reader.article.Article = function (me, Utility){this.setMe=function(_me){me=
 		var info = Utility.stripHTML( "<h1 class='title'>" + this.title + "</h1>" + content.content);
 		this.content = info[0];
 		this.imageList = info[1];
-		this.contentSnippet =  content.content.substring(0, 70);
+		this.contentSnippet = $("<div>" + (article.summary && article.summary.content || content.content) +"</div>").text().substring(0, 70).trim();
 	};
 };

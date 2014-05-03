@@ -29,11 +29,11 @@ com.reader.source.Source = function (me, Articles) {
 		}else{
 			baseURL = 'http://feedly.com/v3/mixes/contents?count=10&streamId=feed/' + url;
 		}
-        var temp = (window.WinJS && window.WinJS.xhr) || jQuery.ajax;
+        var temp = jQuery.ajax;
         temp({ url: baseURL, dataType:'json', data: {query_data: url}, responseType:'json' }).done(
         function fulfilled(result) {
          //   if (result.status === 200 || result.responseStatus === 200) {
-                cb( JSON.parse(result.response));
+                cb(result.items && result || JSON.parse(result.response));
          //   }
          }, function(e){
              console.log(e.status);

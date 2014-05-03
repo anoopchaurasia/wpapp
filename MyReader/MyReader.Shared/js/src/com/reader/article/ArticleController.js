@@ -3,8 +3,9 @@ fm.Import("com.reader.source.Sources");
 fm.Import("com.reader.slide.SlideShow");
 fm.Import("com.reader.setting.Settings");
 fm.Import("lib.FillContent")
+fm.Import('lib.Utility');
 fm.Class("ArticleController", 'jfm.dom.Controller');
-com.reader.article.ArticleController = function (base, me, Sources, SlideShow, Settings, FillContent, Controller) {
+com.reader.article.ArticleController = function (base, me, Sources, SlideShow, Settings, FillContent, Utility, Controller) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
     var fontChange;
@@ -33,7 +34,7 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
     };
 
     this.ArticleController = function (lastState) {
-		$(window).scrollTop(0);
+        $(window).scrollTop(0);
     };
     function getWidth(fs) {
         var w = jQuery(window).width(), cw = fs * multi;
@@ -42,7 +43,26 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
     var multi = 18;
     var setTimeOut;
     function create(data, image) {
+        $("#articleContainer").off().on('click', "a", function () {
+            var href = this.href;
+            jQuery.get(this.href, function (html) {
+                var compare = me.article.contentSnippet.substring(0, 10);
+                html = $(html.match(/<body((.*|\s*)*?)(<\/body>)/gi)[0]);
+                html.find("script").remove();
+                html = html.find(':contains("' + jQuery.trim(compare) + '"):last');
+                if (html.length === 0) {
+                    window.open(href, "__blank");
+                    return;
+                }
+                html = html.parent().parent().parent();
+                var info = Utility.stripHTML(html);
+                me.article.content = info[0].trim();
+                me.article.imageList = info[1];
+                create(me.article.content, me.article.imageList);
+            });
 
+            return false;
+        });
         var articleContainer = $("#articleContainer").empty();
         var articalWidth = getWidth(Settings.getInstance().fontSize), margins = 0;
         articleContainer.parent().css('fontSize', Settings.getInstance().fontSize);
@@ -50,7 +70,7 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
         var htm = "<div class='parent selector'><div class='s'></div></div>";
         clearTimeout(setTimeOut);
         var bodyHeight = window.innerHeight - articleContainer.offset().top - 10;
-        var content = new FillContent();
+        var content = new FillContent(data);
         var i = 0;
         var removeHeight = margins + 30;
 		//data = "<h1 class='title'>" + me.article.title + "</h1>" + data;

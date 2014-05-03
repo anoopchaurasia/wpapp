@@ -16,20 +16,24 @@ lib.FillContent = function (me) {
 	this.truncateWithHeight = function( dom, from, origHtml ) {
  		var lineHeight = parseInt(dom.css("line-height"));
 		dom.html(origHtml);
- 		var limit = dom.height() + dom.offset().top;
- 		$(dom.find(".a").splice(0, from)).remove();
-		dom.SkipRoot(true);
-		dom.find("img.a").filter(function(a, index){
+		var limit = dom.height() + dom.offset().top - lineHeight;
+		var as = dom.find(".a");
+		$(as.splice(0, from)).remove();
+ 		dom.SkipRoot(true);
+        
+	    as.filter("img.a").filter(function (a, index) {
 		  return $(this).height() + $(this).offset().top > limit;
 		}).remove();
-		dom.find(".a").filter(function(a, index){
+		as.filter(".a").filter(function(a, index){
 		  return $(this).height() + $(this).offset().top > limit;
 		}).remove();
 		var len = dom.find(".a").length;
 		dom.SkipRoot();
 		return [ from + len, len ];
 	};
-	this.FillContent = function( ) {
 
+	var html;
+	this.FillContent = function( data ) {
+	    html = data;
 	};
 };

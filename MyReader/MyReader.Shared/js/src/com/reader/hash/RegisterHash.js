@@ -1,11 +1,12 @@
 fm.Package("com.reader.hash");
+fm.Import("com.reader.view.Login");
 fm.Import("com.reader.view.Home");
 fm.Import("com.reader.view.NewsList");
 fm.Import("com.reader.view.Article");
 fm.Import("com.reader.view.EditFeed");
 fm.Import('com.reader.view.AddFeedSource');
 fm.Class("RegisterHash","jfm.hash.HashChange");
-com.reader.hash.RegisterHash = function (base, me, Home, NewsList, Article, EditFeed, HashChange){this.setMe=function(_me){me=_me;};this.setMe=function(_me){me=_me};
+com.reader.hash.RegisterHash = function (base, me, Login, Home, NewsList, Article, EditFeed, HashChange){this.setMe=function(_me){me=_me;};this.setMe=function(_me){me=_me};
     'use strict';
     var lastState = {}; 
     this.RegisterHash = function () {
@@ -14,6 +15,10 @@ com.reader.hash.RegisterHash = function (base, me, Home, NewsList, Article, Edit
            {
                 path: "/source",
                 view: Home
+           },
+           {
+               path: "/login",
+               view: Login
            },
            {
                 path: "/editfeed",
@@ -33,7 +38,7 @@ com.reader.hash.RegisterHash = function (base, me, Home, NewsList, Article, Edit
                 view: "com.reader.view.AddFeedSource"
             }
         ];
-        this.defaultRoute = "/source";
+        this.defaultRoute = "/login";
         this.base.activateCurrent();
     };
 };

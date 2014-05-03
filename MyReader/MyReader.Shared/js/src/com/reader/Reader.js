@@ -13,8 +13,9 @@ com.reader.Reader = function (me, FeedList, Settings, RegisterHash){this.setMe=f
 			$(document.body).css({'margin-top':$(window).scrollTop()});
 		});
 		new RegisterHash();
-		$(document).on('click','.ImageShow img', function(){
-			new me.package.slide.SlideShow($(this).attr('src'));
+		$(document).on('click', '.ImageShow img', function () {
+		    new me.package.slide.SlideShow($(this).attr('src'));
+		    return false;
 		});
 		$(document).on('keypress', function (e) {
 		    if (e.which === 8) {

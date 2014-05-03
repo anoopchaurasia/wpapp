@@ -3,7 +3,10 @@ fm.Class("Utility");
 lib.Utility = function (me){this.setMe=function(_me){me=_me;};
 	var myRegEx = /<\/?[^<>]*\/?>/gim;
 	Static.stripHTML = function (htmlStr) {
-		var html = $("<div>"+htmlStr+"</div>");
+	    var html = htmlStr;
+	    if (typeof htmlStr === 'string') {
+	        html = $("<div>" + htmlStr + "</div>");
+	    }
 		var imageList = [];
 		var temp;
 		html
@@ -28,8 +31,8 @@ lib.Utility = function (me){this.setMe=function(_me){me=_me;};
 		var counter = 0;
 		return [html.html().replace(/>|</gim, function(a){ return a=='>'?"> ": " <"})
 		.replace(/\sstyle=""/gim, " ").replace( /(\s*)<\/?[^<>]*\/?>|(\s*)(.*?)\s/gim,function(a, b){
-			if(a.match(/<\/?[^<>]*\/?>/gim)) return a;
+			if(a.match(/<\/?[^<>]*\/?>/gim) || !a.trim()) return a;
 			return "<span id='word-"+ counter++ +"' class='a'>"+ a+" </span>";
-		}), imageList];
+		}), 5];
 	};
 };

@@ -15,7 +15,9 @@
                 // TODO: This application has been reactivated from suspension.
                 // Restore application state here.
             }
-            fm.basedir = '/js/src';
+            fm.packages.jfm = '/js/src';
+            fm.packages.com = '/js/src';
+            fm.packages.lib = '/js/src';
             fm.Include("com.reader.Reader");
             args.setPromise(WinJS.UI.processAll());
         }
