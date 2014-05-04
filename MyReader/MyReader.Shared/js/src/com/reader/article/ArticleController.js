@@ -10,7 +10,7 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
     this.setMe = function (_me) { me = _me; };
     var fontChange;
     this.onStart = function (pathInfo, cb) {
-        Sources.getInstance().getArticles(parseInt(pathInfo.sourceId), function (articles) {
+        Sources.getInstance().getArticles(pathInfo.sourceId, function (articles) {
             me.article = articles.getById(parseInt(pathInfo.articleId));
             cb();
 

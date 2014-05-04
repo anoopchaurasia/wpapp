@@ -9,7 +9,6 @@ com.reader.store.FeedList = function (me) {
     Static.main = function () {
         instance = new me();
     };
-    this.shortHand = "FeedList";
 
     var myStore;
     this.FeedList = function () {

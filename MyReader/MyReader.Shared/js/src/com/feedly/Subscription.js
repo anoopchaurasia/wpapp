@@ -12,12 +12,27 @@ com.feedly.Subscription = function (me, Api) {
         Api.getData(
             api.url + "/subscriptions",
             {},
-            cb,
+            function (list) {
+                cb(createList(list));
+            },
             'get',
             {
                 "X-Feedly-Access-Token": window.access_token
             });
     };
+
+    function createList(list) {
+        var newlist = [];
+        list.forEach(function (item) {
+            newlist.push({
+                name: item.title,
+                id: encodeURIComponent(item.id),
+                url: item.website,
+                thumbnail: ''
+            });
+        });
+        return newlist;
+    }
 
     Static.add = function (item) {
 

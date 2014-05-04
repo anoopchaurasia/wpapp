@@ -1,11 +1,13 @@
 fm.Package("com.reader.controller");
+fm.Import("com.feedly.Topic");
 fm.Class("EditNewsFeed", 'jfm.dom.Controller');
-com.reader.controller.EditNewsFeed = function (base, me, Controller) {
+com.reader.controller.EditNewsFeed = function (base, me, Topic, Controller) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
     this.EditNewsFeed = function () {
 		this.FeedList = {};
-		FeedList.getInstance().getAll(function(arr){
+		Topic.get(function(arr){
+        debugger;
 			var types = {Added:[]};
 			for(var k=0, len=arr.length;k<len; k++){
 				types[arr[k].type] = types[arr[k].type] || [];

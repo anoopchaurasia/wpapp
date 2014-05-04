@@ -173,6 +173,7 @@
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Api.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Authentication.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Subscription.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Topic.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\abstract\ItemList.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\article\Article.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\article\ArticleController.js" />

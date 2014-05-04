@@ -7,8 +7,7 @@ com.reader.article.ArticleListController = function (base, me, Articles, Sources
     'use strict';
     this.setMe = function (_me) { me = _me; };
     this.onStart = function(pathinfo, cb){
-        pathid = parseInt(pathinfo.sourceId);
-        Sources.getInstance().getArticles(pathid, function(articles){
+        Sources.getInstance().getArticles(pathinfo.sourceId, function(articles){
             me.articles = articles;
             cb();
         });

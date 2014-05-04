@@ -14,7 +14,7 @@ com.reader.source.SourceController = function (base, me, Sources, Subscription, 
 		me.sources = Sources.getInstance();
 		me.sources.items = [];
 		new Subscription().getList(function(list){
-        debugger;
+            
 			if(me["$sources.items"]){
 				me["$sources.items"].add(Sources.convert(list));
 			}else{
