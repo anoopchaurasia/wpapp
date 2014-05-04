@@ -1,6 +1,8 @@
 fm.Package("com.reader.controller");
+fm.Import("com.feedly.Api");
+fm.Import("com.feedly.Subscription");
 fm.Class("AddFeedSourceController", 'jfm.dom.Controller');
-com.reader.controller.AddFeedSourceController = function (base, me, Controller) {
+com.reader.controller.AddFeedSourceController = function (base, me, Api, Subscription, Controller) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
 	var query;
@@ -27,18 +29,7 @@ com.reader.controller.AddFeedSourceController = function (base, me, Controller) 
 	}
 
 	this.save = function(item){
-		var obj = {
-			"website": item.website,
-			"url": item.feedId.replace("feed/", ""),
-			"type": "Added",
-			"name": item.title,
-			"thumbnail": "http://www.google.com/s2/favicons?domain="+item.website,
-			"full": true,
-			inlist: 'true'
-		}
-		FeedList.getInstance().add(obj, function(){
-			history.back();
-		});
+	    Subscription.add(item);
 	};
 
 	this.onStop = function(){
@@ -49,11 +40,11 @@ com.reader.controller.AddFeedSourceController = function (base, me, Controller) 
 		if($.trim(me.name.val()) === "" ) return false;
 		e.preventDefault();
 		me.name.blur();
-		var url = "/reader?method=getFeed&query_data=";
-		url = ReadFile.isPhone ? "http://cloud.feedly.com/v3/search/feeds?n=15&q=":url;
-		jQuery.get(url+me.name.val(), addResult).fail(function(resp){
-			alert("Fail to load. Please check your internet connection.");
- 		});
+		var api = new Api();
+		Api.getData(
+            api.url + "/search/feeds?q=" + me.name.val(),
+            {},
+            addResult);
 		return false;
 	}
 
