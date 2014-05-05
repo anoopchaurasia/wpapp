@@ -12,7 +12,7 @@ com.reader.Reader = function (me, FeedList, Settings, RegisterHash){this.setMe=f
 		$(window).scroll(function(e){
 			$(document.body).css({'margin-top':$(window).scrollTop()});
 		});
-		new RegisterHash();
+        new RegisterHash();
 		$(document).on('click', '.ImageShow img', function () {
 		    new me.package.slide.SlideShow($(this).attr('src'));
 		    return false;
@@ -23,5 +23,13 @@ com.reader.Reader = function (me, FeedList, Settings, RegisterHash){this.setMe=f
 		        history.back();
 		    }
 		});
+
+		WinJS.Application.onbackclick = function (eventObject) {
+		    history.back();
+		    return true;
+		}
+
+
+
 	};
 };

@@ -2,7 +2,8 @@ fm.Package("jfm.hash");
 fm.AbstractClass("HashChange");
 jfm.hash.HashChange = function (me){this.setMe=function(_me){me=_me;};
 	var oldHash;
-	function onHashChange(){
+	function onHashChange() {
+	    console.log(location.href);
 		var hash = location.hash.substring(1);
 		var query = hash.split("?");
 		hash = query[0];

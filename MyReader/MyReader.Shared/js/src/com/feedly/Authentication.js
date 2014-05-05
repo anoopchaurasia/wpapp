@@ -17,10 +17,30 @@ com.feedly.Authentication = function (me, Api) {
             "&scope=" + encodeURIComponent(api.scopeURL) +
             "&display=popup&response_type=code";
         var startURI = new Windows.Foundation.Uri(feedlyURL);
-        var endURI = new Windows.Foundation.Uri(api.callbackURL);        
+        var endURI = new Windows.Foundation.Uri(api.callbackURL);
+        var app = WinJS.Application;
+        var nav = WinJS.Navigation;
+        var activationKinds = Windows.ApplicationModel.Activation.ActivationKind;
         if (Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAndContinue)
         {
             Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAndContinue(startURI, endURI, null, Windows.Security.Authentication.Web.WebAuthenticationOptions.none);
+            function activated(eventObject) {
+                var activationKind = eventObject.detail.kind;
+                var activatedEventArgs = eventObject.detail.detail;
+
+                // Handle launch and continuation activation kinds
+                switch (activationKind) {
+
+                    case activationKinds.webAuthenticationBrokerContinuation: {
+                        var token = eventObject.detail.webAuthenticationResult.responseData.match(new RegExp("code=(.*?)($|\&)", "i"))[1];
+                        storeCredentials(token, function (a, b) {
+                            serverLogin(a, b);
+                        });
+
+                    }
+                }
+            }
+            app.addEventListener("activated", activated, false);
         }
         else
         {
@@ -48,6 +68,9 @@ com.feedly.Authentication = function (me, Api) {
             redirect_uri: api.callbackURL,
             grant_type: "authorization_code"
         }, function (data) {
+            if (typeof data === 'string') {
+                data = JSON.parse(data);
+            }
             var vault = new Windows.Security.Credentials.PasswordVault();
             vault.add(new Windows.Security.Credentials.PasswordCredential(
                 resourceName, data.access_token, data.refresh_token));

@@ -5,6 +5,7 @@ com.reader.login.LoginController = function (base, me, Authentication, Controlle
     'use strict';
     this.setMe = function (_me) { me = _me; };
     var authenticator;
+
     this.LoginController = function (lastState) {
         base();
         document.cookie = 'feedlyToken=asasasas expires=Fri, 3 Aug 2010 20:47:11 UTC;';
@@ -17,7 +18,7 @@ com.reader.login.LoginController = function (base, me, Authentication, Controlle
 
     function loginUser(access) {
         window.access_token = access;
-        location.hash = "/source";
+        location.hash = "#/source";
     }
 
     this.reRender = function () {

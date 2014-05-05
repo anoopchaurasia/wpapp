@@ -43,7 +43,8 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
     var multi = 18;
     var setTimeOut;
     function create(data, image) {
-        $("#articleContainer").off().on('click', "a", function () {
+
+        $(document).off('click').on('click',"#morelink", function () {
             var href = this.href;
             jQuery.get(this.href, function (html) {
                 var compare = me.article.contentSnippet.substring(0, 10);
@@ -87,6 +88,7 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
             if (trancatedLength[1] <= 0) {
                 renderComplete(1, i);
                 articleContainer.append('<br style="clear:both" />');
+                $("div.s:last").append("<a id='morelink' href='" + me.article.link + "'>more...</a>");
                 return;
             }
             i++;

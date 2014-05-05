@@ -7,7 +7,7 @@ com.reader.store.FeedList = function (me) {
     'use strict';
     var instance;
     Static.main = function () {
-        instance = new me();
+       // instance = new me();
     };
 
     var myStore;
