@@ -18,7 +18,7 @@ com.reader.source.Source = function (me, Articles, Api) {
         }else{
     	    Api.getData(Api.url + "/mixes/contents", {
     	        streamId:decodeURIComponent(me.id),
-                count:3
+                count:10
     	    }, function (data) {
                 me.articles = new Articles( data, me );
                 cb(me.articles);

@@ -6,6 +6,9 @@
     <SharedGUID>69558651-0a1f-4d44-8807-9e100d7e009b</SharedGUID>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)css\default.css" />
+    <Content Include="$(MSBuildThisFileDirectory)css\phone.css" />
+    <Content Include="$(MSBuildThisFileDirectory)css\reader.css" />
     <Content Include="$(MSBuildThisFileDirectory)html\addfeeds.html" />
     <Content Include="$(MSBuildThisFileDirectory)html\addfeedsource.html" />
     <Content Include="$(MSBuildThisFileDirectory)html\addfeedsource.view.html" />

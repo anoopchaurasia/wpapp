@@ -15,7 +15,7 @@ com.feedly.Feeds = function (me, Api) {
             Api.url + "/mixes/contents",
             {
                 streamId: "user/8b7ff160-7141-4ea5-b344-cac0bb77949e/category/global.all",
-                count: 3
+                count: 10
             },
             function (l) {
                 cb(list);

@@ -46,6 +46,7 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
 
         $(document).off('click').on('click',"#morelink", function () {
             var href = this.href;
+            $(this).html("loading....");
             jQuery.get(this.href, function (html) {
                 var compare = me.article.contentSnippet.substring(0, 10);
                 html = $(html.match(/<body((.*|\s*)*?)(<\/body>)/gi)[0]);
@@ -59,6 +60,7 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
                 var info = Utility.stripHTML(html);
                 me.article.content = info[0].trim();
                 me.article.imageList = info[1];
+                me.article.isFullContent = true;
                 create(me.article.content, me.article.imageList);
             });
 
@@ -85,10 +87,12 @@ com.reader.article.ArticleController = function (base, me, Sources, SlideShow, S
 			trancatedLength = content.truncateWithHeight(elem.find("div.inImage"), trancatedLength[0], data);			
 		}
         function recursive() {
-            if (trancatedLength[1] <= 0) {
+            if (trancatedLength[0] === trancatedLength[2] || trancatedLength[1]<=0) {
                 renderComplete(1, i);
                 articleContainer.append('<br style="clear:both" />');
-                $("div.s:last").append("<a id='morelink' href='" + me.article.link + "'>more...</a>");
+                if (!me.article.isFullContent) {
+                    $("div.s:last").append("<div><a id='morelink' href='" + me.article.link + "'>more...</a></div>");
+                }
                 return;
             }
             i++;

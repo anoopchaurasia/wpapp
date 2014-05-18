@@ -14,23 +14,38 @@ lib.FillContent = function (me) {
 		}).remove();
 	};
 	this.truncateWithHeight = function( dom, from, origHtml ) {
- 		var lineHeight = parseInt(dom.css("line-height"));
-		dom.html(origHtml);
+	    var lineHeight = parseInt(dom.css("line-height"));
+	    var tempDom = $("<div>"+origHtml+"</div>");
 		var limit = dom.height() + dom.offset().top - lineHeight;
-		var as = dom.find(".a");
+		var as = tempDom.find(".a");
+		var totalA = as.length;
 		$(as.splice(0, from)).remove();
- 		dom.SkipRoot(true);
-        
-	   /* as.filter("img.a").filter(function (a, index) {
+		tempDom.SkipRoot(true);
+		dom.html(tempDom.children());
+		var len;
+        (function () {
+            var i = 0;
+            var total = as.length; var temp;
+            while (i < total && (temp = as[i]) ) {
+                temp = $(temp);
+                if (temp.height() + temp.offset().top > limit) {
+                    break;
+                }
+                i++;
+            }
+            $(as.splice(i, total)).remove();
+            len = i;
+        })();
+		/*as.filter(".a").filter(function(a, index){
 		  return $(this).height() + $(this).offset().top > limit;
 		}).remove();
         */
-		as.filter(".a").filter(function(a, index){
-		  return $(this).height() + $(this).offset().top > limit;
-		}).remove();
-		var len = dom.find(".a").length;
+		
 		dom.SkipRoot();
-		return [ from + len, len ];
+		if (len === 0) {
+		  //  dom.remove();
+		}
+		return [from + len, len, totalA];
 	};
 
 	var html;
