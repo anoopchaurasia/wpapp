@@ -3,17 +3,19 @@ fm.Import("com.feedly.Api");
 fm.Class("Subscription");
 com.feedly.Subscription = function (me, Api) {
     'use strict';
-    var api;
-    this.Subscription = function () {
-        api = Api.getInstance();
-    };
-
-    this.getList = function (cb) {
+   
+    var list;
+    Static.getList = function (cb) {
+        if (list) {
+            cb(list);
+            return;
+        }
         Api.getData(
-            api.url + "/subscriptions",
+            Api.url + "/subscriptions",
             {},
-            function (list) {
-                cb(createList(list));
+            function (l) {
+                list = createList(l);
+                cb(list);
             },
             'get',
             {

@@ -21,9 +21,10 @@ lib.FillContent = function (me) {
 		$(as.splice(0, from)).remove();
  		dom.SkipRoot(true);
         
-	    as.filter("img.a").filter(function (a, index) {
+	   /* as.filter("img.a").filter(function (a, index) {
 		  return $(this).height() + $(this).offset().top > limit;
 		}).remove();
+        */
 		as.filter(".a").filter(function(a, index){
 		  return $(this).height() + $(this).offset().top > limit;
 		}).remove();

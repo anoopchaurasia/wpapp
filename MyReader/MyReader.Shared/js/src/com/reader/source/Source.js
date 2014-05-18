@@ -16,7 +16,7 @@ com.reader.source.Source = function (me, Articles, Api) {
     	if(me.articles ){
             cb(me.articles);
         }else{
-    	    Api.getData(Api.getInstance().url + "/mixes/contents", {
+    	    Api.getData(Api.url + "/mixes/contents", {
     	        streamId:decodeURIComponent(me.id),
                 count:3
     	    }, function (data) {
@@ -29,22 +29,4 @@ com.reader.source.Source = function (me, Articles, Api) {
             );
         }
     };
-
-    function loadData (url, cb) {
-		var baseURL;
-		if(location.href.indexOf('localhost') != -1){
-			baseURL = '/reader/getFeed';
-		}else{
-			baseURL = 'http://feedly.com/v3/mixes/contents?count=10&streamId=feed/' + url;
-		}
-        var temp = jQuery.ajax;
-        temp({ url: baseURL, dataType:'json', data: {query_data: url}, responseType:'json' }).done(
-        function fulfilled(result) {
-         //   if (result.status === 200 || result.responseStatus === 200) {
-                cb(result.items && result || JSON.parse(result.response));
-         //   }
-         }, function(e){
-             console.log(e.status);
-        });
-    }
 }

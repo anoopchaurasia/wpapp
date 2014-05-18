@@ -3,21 +3,17 @@ fm.Import("com.feedly.Api");
 fm.Class("Authentication");
 com.feedly.Authentication = function (me, Api) {
     'use strict';
-    var api;
-    this.Authentication = function () {
-        api = Api.getInstance();
-    };
 
     function launchWebAuth(serverLogin) {
        
-        var feedlyURL = api.url+"/auth/auth" +
-            "?client_id=" + api.clientId +
-            "&redirect_uri=" + encodeURIComponent(api.callbackURL) +
-            "&secret_id=" + api.secretId +
-            "&scope=" + encodeURIComponent(api.scopeURL) +
+        var feedlyURL = Api.url+"/auth/auth" +
+            "?client_id=" + Api.clientId +
+            "&redirect_uri=" + encodeURIComponent(Api.callbackURL) +
+            "&secret_id=" + Api.secretId +
+            "&scope=" + encodeURIComponent(Api.scopeURL) +
             "&display=popup&response_type=code";
         var startURI = new Windows.Foundation.Uri(feedlyURL);
-        var endURI = new Windows.Foundation.Uri(api.callbackURL);
+        var endURI = new Windows.Foundation.Uri(Api.callbackURL);
         var app = WinJS.Application;
         var nav = WinJS.Navigation;
         var activationKinds = Windows.ApplicationModel.Activation.ActivationKind;
@@ -61,42 +57,39 @@ com.feedly.Authentication = function (me, Api) {
 
     function storeCredentials(token, cb) {
         
-        Api.getData(api.url + "/auth/token", {
+        Api.getData(Api.url + "/auth/token", {
             code: token,
-            client_id: api.clientId,
-            client_secret: api.secretId,
-            redirect_uri: api.callbackURL,
+            client_id: Api.clientId,
+            client_secret: Api.secretId,
+            redirect_uri: Api.callbackURL,
             grant_type: "authorization_code"
         }, function (data) {
             if (typeof data === 'string') {
                 data = JSON.parse(data);
             }
-            var vault = new Windows.Security.Credentials.PasswordVault();
-            vault.add(new Windows.Security.Credentials.PasswordCredential(
-                resourceName, data.access_token, data.refresh_token));
+            data.currentTime = (new Date).getTime();
+            localStorage.accountInfo = JSON.stringify(data);
             cb(data.access_token, data.refresh_token);
-        }, "post");
-       
+        }, "post"); 
     }
 
     this.remove = function () {
-        var loginCredential = getCredentialFromLocker();
-        var vault = new Windows.Security.Credentials.PasswordVault();
-        vault.remove(loginCredential);
+        delete localStorage.accountInfo;
     };
 
     var resourceName = "App";
     var defaultUserName;
 
     this.login = function (serverLogin) {
-        var loginCredential = getCredentialFromLocker();
+        var loginCredential = localStorage.accountInfo;
 
         if (loginCredential != null) {
-            // There is a credential stored in the locker.
-            // Populate the Password property of the credential
-            // for automatic login.
-            loginCredential.retrievePassword();
-            serverLogin(loginCredential.userName, loginCredential.password);
+            var accountInfo = JSON.parse(loginCredential);
+            if (accountInfo.expires_in > ((new Date).getTime() - accountInfo.currentTime)/1000 ) {
+                serverLogin(accountInfo.access_token, loginCredential.refresh_token);
+            } else {
+                getNewAccessToken(accountInfo.refresh_token);
+            }
         } else {
             // There is no credential stored in the locker.
             // Display UI to get user credentials.
@@ -107,24 +100,20 @@ com.feedly.Authentication = function (me, Api) {
        
     }
 
-
-    function getCredentialFromLocker() {
-        var credential = null;
-
-        var vault = new Windows.Security.Credentials.PasswordVault();
-        try{
-            var credentialList = vault.findAllByResource(resourceName);
-            if (credentialList.length > 0) {
-                if (credentialList.length == 1) {
-                    credential = credentialList[0];
-                }
+    function getNewAccessToken(refresh_token, cb) {
+        Api.getData(Api.url + "/auth/token", {
+            refresh_token: refresh_token,
+            client_id: Api.clientId,
+            client_secret: Api.secretId,
+            grant_type: 'refresh_token'
+        }, function (data) {
+            if (typeof data === 'string') {
+                data = JSON.parse(data);
             }
-        }catch(e){
-
-        }
-        return credential;
+            data.currentTime = (new Date).getTime();
+            data.refresh_token = refresh_token;
+            localStorage.accountInfo = JSON.stringify(data);
+            cb(data.access_token, data.refresh_token);
+        }, "post");
     }
-
-   
-
 };

@@ -172,6 +172,7 @@
     <Content Include="$(MSBuildThisFileDirectory)js\jsfm.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Api.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Authentication.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Feeds.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Subscription.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\feedly\Topic.js" />
     <Content Include="$(MSBuildThisFileDirectory)js\src\com\reader\abstract\ItemList.js" />

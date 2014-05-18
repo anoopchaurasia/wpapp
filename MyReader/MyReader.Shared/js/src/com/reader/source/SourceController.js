@@ -1,9 +1,10 @@
 fm.Package("com.reader.source");
 fm.Import("com.reader.source.Sources");
 fm.Import("com.feedly.Subscription");
+fm.Import("com.feedly.Feeds");
 fm.Import("com.reader.setting.Settings");
 fm.Class("SourceController", 'jfm.dom.Controller');
-com.reader.source.SourceController = function (base, me, Sources, Subscription, Settings, Controller) {
+com.reader.source.SourceController = function (base, me, Sources, Subscription, Feeds, Settings, Controller) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
     var windowResize, dontRender;
@@ -13,7 +14,10 @@ com.reader.source.SourceController = function (base, me, Sources, Subscription, 
         me.settings = Settings.getInstance();
 		me.sources = Sources.getInstance();
 		me.sources.items = [];
-		new Subscription().getList(function(list){
+		Feeds.getMix(function () {
+
+		});
+		Subscription.getList(function(list){
             
 			if(me["$sources.items"]){
 				me["$sources.items"].add(Sources.convert(list));
@@ -34,7 +38,9 @@ com.reader.source.SourceController = function (base, me, Sources, Subscription, 
     }
 	
 	this.afterRender = function(){
-        var oldScrollY =0;
+	    var oldScrollY = 0;
+	    
+	    WinJS.UI.processAll();
 		me.sourceListCont.height(window.innerHeight - me.sourceListCont.position().top-2);
     };
 

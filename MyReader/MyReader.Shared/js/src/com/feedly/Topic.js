@@ -9,7 +9,7 @@ com.feedly.Topic = function(me, Api){
 
     Static.get = function(cb){
         
-        Api.getData(Api.getInstance().url + me.url, {}, cb, 'get',{
+        Api.getData(Api.url + me.url, {}, cb, 'get',{
                 "X-Feedly-Access-Token": window.access_token
             });
     };

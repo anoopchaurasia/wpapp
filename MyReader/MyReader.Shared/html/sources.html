@@ -1,56 +1,43 @@
 <div>
-    <div 
-         class="header-class main">
-        <img 
-             style="max-height:40px" 
+    <div class="header-class main">
+        <img style="max-height:40px"
              src="/cr1.png" />
-        <a 
-            class="home-header" 
-            style="font-size:22px; float:right; margin-right:10px;" 
-            href="#/editfeed">
-            
-            <span
-                class="add-plus">
+        <a class="home-header"
+           style="font-size:22px; float:right; margin-right:10px;"
+           href="#/editfeed">
+
+            <span class="add-plus">
                 +
             </span>
-            <span 
-                class="add-text">
+            <span class="add-text">
                 add
             </span>
         </a>
     </div>
-    <div 
-        style="overflow:auto;width: 99%" 
-        fm-name="sourceListCont">
-        
-        <div 
-            class="source-item-list" 
-            fm-repeat="item in sources.items">
-            
-            <div 
-                class="items no-text-wrap">
-                
-                <a 
-                    fm-href="#/source/{{item.id}}">
-                    
-                    <img 
-                        style="max-width:30px; min-width:20px;" 
-                        fm-src='{{item.thumbnail}}' />
-                    
-                    <span 
-                        fm-hide="hideText" 
-                        fm-bind="item.name">
+    <div style="overflow:auto;width: 99%"
+         fm-name="sourceListCont">
+
+        <div class="source-item-list"
+             fm-repeat="item in sources.items">
+
+            <div class="items no-text-wrap">
+
+                <a fm-href="#/source/{{item.id}}">
+
+                    <img style="max-width:30px; min-width:20px;"
+                         fm-src='{{item.thumbnail}}' />
+
+                    <span fm-hide="hideText"
+                          fm-bind="item.name">
                     </span>
                 </a>
             </div>
         </div>
-        <div 
-            fm-name="addInfo" 
-            style="text-align:center;margin-top:40%;display:none;">
-            
-            <a 
-                style="font-size:30px; text-decoration:none;line-height:30px;" 
-                href="#/editfeed">
+        <div fm-name="addInfo"
+             style="text-align:center;margin-top:40%;display:none;">
+
+            <a style="font-size:30px; text-decoration:none;line-height:30px;"
+               href="#/editfeed">
                 Click to (+)Add Feed Source
             </a>
         </div>

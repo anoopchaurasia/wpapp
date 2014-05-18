@@ -5,12 +5,13 @@ com.feedly.Api = function (me) {
     this.setMe = function (_me) {
         me = _me;
     }
-    this.Api = function () {
-        this.url= "https://sandbox.feedly.com/v3",
-        this.clientId = "sandbox";
-        this.secretId = "0AUDIAHZEB0ISJ1JLFWZ";
-        this.scopeURL = 'https://cloud.feedly.com/subscriptions';
-        this.callbackURL = "https://localhost";
+    
+    this.init = function () {
+        Static.url = "https://sandbox.feedly.com/v3",
+        Static.clientId = "sandbox";
+        Static.secretId = "0AUDIAHZEB0ISJ1JLFWZ";
+        Static.scopeURL = 'https://cloud.feedly.com/subscriptions';
+        Static.callbackURL = "https://localhost";
     };
 
     Static.getData = function (url, data, cb, type, header) {
@@ -21,18 +22,10 @@ com.feedly.Api = function (me) {
            dataType: type === 'post' ? "text":"json",
             data: data,
             success: cb,
-            error: function (resp, a) {
+            error: function (resp, a) {5
                debugger;
             },
             headers: header
         });
-    };
-
-    var singleton;
-    Static.getInstance = function () {
-        if (!singleton) {
-            singleton = new me();
-        }
-        return singleton;
     };
 };
